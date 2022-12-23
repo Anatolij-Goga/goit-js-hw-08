@@ -1,10 +1,13 @@
 // Add imports above this line
+
 import { galleryItems } from './gallery-items';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import '../css/common.css';
 import '../css/01-gallery.css';
+
 // Change code below this line
+
 const galleryListElement = document.querySelector('.gallery');
 const galleryMarkup = creatGalleryItemsMarkup(galleryItems);
 galleryListElement.insertAdjacentHTML('beforeend', galleryMarkup);
@@ -27,7 +30,7 @@ let lightbox = new SimpleLightbox('.gallery a', {
   doubleTapZoom: 1,
 });
 
-onGalleryContainerClick.addEventListener('click', event => {
+galleryListElement.addEventListener('click', event => {
   event.preventDefault();
   if (!event.target.classList.contains('gallery__image')) {
     return;
@@ -36,7 +39,7 @@ onGalleryContainerClick.addEventListener('click', event => {
   galleryListElement.addEventListener('keydown', event => {
     if (event.code === 'Escape') {
       instance.close(() => {
-        galleryListElement.removeEventListener;
+        galleryListElement.removeEventListener('keydown', instance.close);
       });
     }
   });
